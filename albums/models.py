@@ -9,3 +9,6 @@ class Album(models.Model):
     release_datetime = models.DateTimeField(blank=False)
     cost = models.DecimalField(blank=False, max_digits=9, decimal_places=2)
     artist = models.ForeignKey(Artist, on_delete=models.CASCADE)
+    
+    def __str__(self):
+        return self.name
