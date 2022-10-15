@@ -31,15 +31,15 @@
 
 #### get the latest released album
 	>>> Album.objects.latest('release_datetime')
-    <Album: Album object (2)>
+    <Album: dawn fm>
 
 #### get all albums released before today
     >>> Album.objects.filter(release_datetime__date__lt = datetime.today())
-    <QuerySet [<Album: Album object (1)>, <Album: Album object (2)>]>
+    <QuerySet [<Album: relapse>, <Album: dawn fm>]>
 
 #### get all albums released today or before but not after today
     >>> Album.objects.filter(release_datetime__date__lte = datetime.today())
-    <QuerySet [<Album: Album object (1)>, <Album: Album object (2)>]>
+    <QuerySet [<Album: relapse>, <Album: dawn fm>]>
 
 #### count the total number of albums (hint: count in an optimized manner)
     >>> Album.objects.all().count()
@@ -48,12 +48,12 @@
 #### in 2 different ways, for each artist, list down all of his/her albums
     # way 1
     >>> [artist.album_set.all() for artist in Artist.objects.all()]
-    [<QuerySet [<Album: Album object (1)>]>, <QuerySet []>, <QuerySet [<Album: Album object (2)>]>]
+    [<QuerySet [<Album: relapse>]>, <QuerySet []>, <QuerySet [<Album: dawn fm>]>]
 
     # way 2
     >>> [Album.objects.filter(artist_id=artist.id) for artist in Artist.objects.all()]
-    [<QuerySet [<Album: Album object (1)>]>, <QuerySet []>, <QuerySet [<Album: Album object (2)>]>]
+    [<QuerySet [<Album: relapse>]>, <QuerySet []>, <QuerySet [<Album: dawn fm>]>]
 
 #### list down all albums ordered by cost then by name (cost has the higher priority)
     >>> Album.objects.order_by('cost', 'name')
-    <QuerySet [<Album: Album object (2)>, <Album: Album object (1)>]>
+    <QuerySet [<Album: dawn fm>, <Album: relapse>]>
