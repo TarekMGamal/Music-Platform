@@ -1,5 +1,3 @@
-from enum import auto
-from unicodedata import decimal
 from django.db import models
 from artists.models import Artist
 
