@@ -1,5 +1,4 @@
 from django.contrib import admin
-
 from albums.models import Album
 from .models import Artist
 
@@ -13,6 +12,6 @@ class ArtistAdmin(admin.ModelAdmin):
     inlines = [InlineAlbum]
     
     def approved_albums_number(self, artist_obj):
-        approved_albums_number = Album.objects.filter(artist = artist_obj, isApproved = True).count()
+        approved_albums_number = Album.objects.filter(artist = artist_obj, is_approved = True).count()
         return approved_albums_number
         
