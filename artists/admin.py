@@ -1,5 +1,4 @@
 from django.contrib import admin
-
 from albums.models import Album
 from .models import Artist
 

@@ -1,5 +1,5 @@
 from django.db import models
-from django.db.models import Value, Count, Q
+from django.db.models import Count, Q
 
 class ArtistManager(models.Manager):
     def get_queryset(self):
