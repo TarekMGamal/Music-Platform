@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Artists</title>
+</head>
+
+<body>
+    <h1>Artists</h1>
+    {% regroup albums by artist as artists %}
+    {% for artist in artists %}
+    <div style="border: solid; padding: 1em">
+        <h2>Artist:</h2>
+        <p>id: {{ artist.grouper.id }}</p>
+        <p>stage name: {{ artist.grouper.stage_name }}</p>
+        <p>social media link: {{ artist.grouper.social_media_link }}</p>
+        {% for album in artist.list %}
+        <div style="border: solid; padding: 1em">
+            <h4>Album:</h4>
+            <p>id: {{ album.id }}</p>
+            <p>name: {{ album.name }}</p>
+            <p>created: {{ album.created }}</p>
+            <p>release datetime: {{ album.release_datetime }}</p>
+            <p>cost: {{ album.cost }}</p>
+        </div>
+        {% endfor %}
+    </div>
+    {% endfor %}
+</body>
+
+</html>
