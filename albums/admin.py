@@ -12,7 +12,7 @@ class AlbumAdmin(admin.ModelAdmin):
         (None, { "fields": ('creation_datetime',) }),
         (None, { "fields": ('cost',) }),
         (None, {
-            "fields": ('isApproved',),
+            "fields": ('is_approved',),
             "description": 'Approve the album if its name is not explicit'
         })
     )
