@@ -3,13 +3,14 @@ from .models import Album
 
 @admin.register(Album)
 class AlbumAdmin(admin.ModelAdmin):
-    readonly_fields = ('creation_datetime',)
+    readonly_fields = ('created', 'modified')
     
     fieldsets = (
         (None, { "fields": ('name',) }),
         (None, { "fields": ('artist',) }),
         (None, { "fields": ('release_datetime',) }),
-        (None, { "fields": ('creation_datetime',) }),
+        (None, { "fields": ('created',) }),
+        (None, { "fields": ('modified',) }),
         (None, { "fields": ('cost',) }),
         (None, {
             "fields": ('is_approved',),
