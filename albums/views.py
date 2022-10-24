@@ -1,13 +1,10 @@
 from django.shortcuts import render, redirect
 from .forms import CreateAlbumForm
+from django.views.generic import CreateView
+from .models import Album
 
-def albums_create(request):
-    if request.method == 'POST':
-        form = CreateAlbumForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('artists-home')
-    else:
-        form = CreateAlbumForm()
-        
-    return render(request, 'albums/albums_create.html', {'form': form})
+class albums_create(CreateView):
+    model = Album
+    form_class = CreateAlbumForm
+    template_name = 'albums/albums_create.html'
+    success_url = '/artists/'

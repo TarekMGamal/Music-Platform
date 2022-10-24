@@ -1,23 +1,21 @@
 from django.shortcuts import redirect, render
 from albums.models import Album
+from .models import Artist
 from .forms import CreateArtistForm
+from django.views.generic import CreateView, TemplateView
 
 
-def artists(request):
-    albums = Album.objects.select_related('artist').order_by('artist').all()
-    data = {
-        'albums': albums
-    }
-    return render(request, 'artists/artists.html', data)
+class artists(TemplateView):
+    template_name = 'artists/artists.html'
+    
+    def get_context_data(self, **kwargs):
+        context =  super().get_context_data(**kwargs)
+        context['albums'] = Album.objects.select_related('artist').order_by('artist').all()
+        return context
 
 
-def artists_create(request):
-    if request.method == 'POST':
-        form = CreateArtistForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('artists-home')
-    else:
-        form = CreateArtistForm()
-        
-    return render(request, 'artists/artists_create.html', {'form': form})
+class artists_create(CreateView):
+    model = Artist
+    form_class = CreateArtistForm
+    template_name = 'artists/artists_create.html'
+    success_url = '/artists/'
