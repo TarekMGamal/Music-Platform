@@ -3,6 +3,7 @@ from albums.models import Album
 from .models import Artist
 from .forms import CreateArtistForm
 from django.views.generic import CreateView, TemplateView
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 
 class artists(TemplateView):
@@ -14,7 +15,7 @@ class artists(TemplateView):
         return context
 
 
-class artists_create(CreateView):
+class artists_create(LoginRequiredMixin, CreateView):
     model = Artist
     form_class = CreateArtistForm
     template_name = 'artists/artists_create.html'
