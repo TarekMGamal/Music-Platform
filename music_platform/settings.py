@@ -29,6 +29,11 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 
+# For using User custom model instead of the default one
+
+AUTH_USER_MODEL = "users.User"
+
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -38,7 +43,7 @@ INSTALLED_APPS = [
     'imagekit',
     'artists.apps.ArtistsConfig',
     'albums.apps.AlbumsConfig',
-    'users',
+    'users.apps.UsersConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
