@@ -32,10 +32,13 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'knox',
+    'django_extensions',
     'rest_framework',
     'imagekit',
     'artists.apps.ArtistsConfig',
     'albums.apps.AlbumsConfig',
+    'users',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
