@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Album
+from .models import Album, Song
 
 @admin.register(Album)
 class AlbumAdmin(admin.ModelAdmin):
@@ -18,3 +18,7 @@ class AlbumAdmin(admin.ModelAdmin):
         })
     )
     
+    
+@admin.register(Song)
+class SongAdmin(admin.ModelAdmin):
+    list_display = ('name', 'album', 'image', 'image_thumbnail', 'audio')
