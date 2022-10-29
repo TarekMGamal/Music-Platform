@@ -4,6 +4,13 @@ from django.core.validators import validate_email
 
 
 class user_serializer(serializers.ModelSerializer):
+    class Meta:
+        model = get_user_model()
+        fields = ("id", "username", "email", "bio")
+        
+
+
+class register_user_serializer(serializers.ModelSerializer):
     password = serializers.CharField(write_only=True)
     confirm_password = serializers.CharField(write_only=True, label="Confirm password")
 

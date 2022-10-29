@@ -3,13 +3,13 @@ from django.contrib.auth import get_user_model, login
 from rest_framework import permissions, generics
 from knox.views import LoginView as KnoxLoginView
 from rest_framework.authtoken.serializers import AuthTokenSerializer
-from users.serializers import user_serializer
+from users.serializers import register_user_serializer
 from rest_framework.response import Response
 
 class create_user_api(generics.CreateAPIView):
     model = get_user_model()
     permission_classes = [permissions.AllowAny]
-    serializer_class = user_serializer
+    serializer_class = register_user_serializer
     
     
 class login_user_api(KnoxLoginView):
