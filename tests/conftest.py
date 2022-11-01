@@ -15,3 +15,10 @@ def auth_client():
         return client
     
     return auth_client_function
+
+
+@pytest.fixture
+def non_auth_client():
+    client = APIClient()
+        
+    return client
