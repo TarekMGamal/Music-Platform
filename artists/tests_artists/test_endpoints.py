@@ -21,8 +21,16 @@ def test_artists_create(auth_client, non_auth_client):
     authenticated_client = auth_client()
     non_authenticated_client = non_auth_client
     
+    data = {
+        "stage_name": "testartist",
+        "social_media_link": "https://www.instagram.com/"
+    }
+    
     response1 = authenticated_client.get('/artists/create/')
     response2 = non_authenticated_client.get('/artists/create/')
+    response3 = authenticated_client.post('/artists/create/', data)
+    
     
     assert response1.status_code == 200
-    assert response2.status_code == 302
+    assert response2.status_code == 302  # redirect to login page
+    assert response3.status_code == 302  # create new artist and redirect to artists page
