@@ -17,11 +17,10 @@ def test_albums_create(auth_client, non_auth_client):
         "is_approved": True
     }
     
-    
     response1 = authenticated_client.get('/albums/create/')
     response2 = non_authenticated_client.get('/albums/create/')
     response3 = authenticated_client.post('/albums/create/', data)
     
-    assert response1.status_code == 200
-    assert response2.status_code == 302  # redirect to login page
-    assert response3.status_code == 200  # create new album and redirect to artists page
+    assert response1.status_code == 200  # authenticated client should access this endpoint normaly
+    assert response2.status_code == 302  # should redirect to login page
+    assert response3.status_code == 200  # should create new album and redirect to artists page
