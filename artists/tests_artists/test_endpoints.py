@@ -29,9 +29,7 @@ def test_artists_create(auth_client, non_auth_client):
     response1 = authenticated_client.get('/artists/create/')
     response2 = non_authenticated_client.get('/artists/create/')
     response3 = authenticated_client.post('/artists/create/', data)
-    response4 = authenticated_client.post('/artists/create/', data)
     
     assert response1.status_code == 200  # authenticated client should access this endpoint normaly
     assert response2.status_code == 302  # should redirect to login page
     assert response3.status_code == 302  # should create new artist and redirect to artists page
-    assert response4.status_code == 400  # should not create artist with already used stage name
