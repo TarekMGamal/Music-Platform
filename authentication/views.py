@@ -3,6 +3,7 @@ from django.contrib.auth import get_user_model, login
 from rest_framework import permissions, generics
 from knox.views import LoginView as KnoxLoginView
 from rest_framework.authtoken.serializers import AuthTokenSerializer
+from rest_framework.authentication import BasicAuthentication
 from users.serializers import register_user_serializer
 
 class create_user_api(generics.CreateAPIView):
@@ -11,6 +12,7 @@ class create_user_api(generics.CreateAPIView):
     
     
 class login_user_api(KnoxLoginView):
+    authentication_classes = [BasicAuthentication]
     permission_classes = (permissions.AllowAny,)
     
     def post(self, request, format=None):
