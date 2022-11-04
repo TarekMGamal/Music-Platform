@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'knox',
     'django_extensions',
     'rest_framework',
+    'django_filters',
     'imagekit',
     'artists',
     'albums',
