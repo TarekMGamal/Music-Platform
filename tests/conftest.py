@@ -7,10 +7,30 @@ def auth_client():
     def auth_client_function(user = None):
         client = APIClient()
         
+        login_data = {
+            "username": "",
+            "password": ""
+        }
+        
         if (user == None):
-            user = User.objects.create(username="testusername", password="testpassword")
+            data = {
+                "username": "testuser",
+                "email": "testemail@something.com",
+                "password": "Testpassword123",
+                "confirm_password": "Testpassword123"
+            }
             
-        client.force_login(user)
+            login_data["username"] = data["username"]
+            login_data["password"] = data["password"]
+            
+            client.post('/accounts/register/', data)
+        else:
+            login_data["username"] = user.username
+            login_data["password"] = user.password
+                
+        response = client.post('/accounts/login/', login_data)
+        token = response.data["token"]
+        client.credentials(HTTP_AUTHORIZATION='Token ' + token)
 
         return client
     
