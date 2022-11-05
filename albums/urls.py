@@ -2,5 +2,7 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    path('create/', views.albums_create.as_view(), name="albums-create")
+    path('create/', views.albums_create.as_view(), name="albums-create"),
+    path('', views.albums.as_view(), name="albums"),
+    
 ]
