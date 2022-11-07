@@ -29,6 +29,8 @@ class albums(generics.ListCreateAPIView):
     pagination_class = pagination.LimitOffsetPagination
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
     serializer_class = album_serializer
+    filter_backends = (filters.DjangoFilterBackend,)
+    filterset_class = albums_filter
     
     def perform_create(self, serializer):
         serializer.save(artist=self.request.user.artist)
