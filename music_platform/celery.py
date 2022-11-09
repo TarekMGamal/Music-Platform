@@ -6,14 +6,12 @@ from celery import Celery
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'music_platform.settings')
 
 app = Celery('music_platform')
-app.conf.broker_url = 'redis://localhost:6379/0'
-app.conf.result_backend = 'redis://localhost:6379/0'
 
 # Using a string here means the worker doesn't have to serialize
 # the configuration object to child processes.
-# - namespace='CELERY' means all celery-related configuration keys
-#   should have a `CELERY_` prefix.
-app.config_from_object('django.conf:settings', namespace='CELERY')
+# - namespace='CELERY_CONF' means all celery-related configuration keys
+#   should have a `CELERY_CONF` prefix.
+app.config_from_object('django.conf:settings', namespace='CELERY_CONF')
 
 # Load task modules from all registered Django apps.
 app.autodiscover_tasks()
