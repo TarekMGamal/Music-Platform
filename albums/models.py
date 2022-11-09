@@ -4,8 +4,9 @@ from artists.models import Artist
 from model_utils.models import TimeStampedModel
 from imagekit.models import ImageSpecField
 from django.core.validators import FileExtensionValidator
-from django.db.models.signals import pre_save, pre_delete
+from django.db.models.signals import pre_save, pre_delete, post_save
 from django.dispatch import receiver
+from .tasks import send_email
 
 class Album(TimeStampedModel):
     name = models.CharField(max_length=100, default='New Album')
@@ -45,3 +46,7 @@ def check_song_limits(sender, instance, **kwargs):
     songs_number = album.song_set.count()
     if songs_number == 1:
         raise ValidationErr
+    
+@receiver(post_save, sender=Album)
+def send_email_after_save(sender, instance, **kwargs):
+    send_email.delay(instance.artist.stage_name, instance.name)
