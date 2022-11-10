@@ -49,4 +49,4 @@ def check_song_limits(sender, instance, **kwargs):
     
 @receiver(post_save, sender=Album)
 def send_email_after_save(sender, instance, **kwargs):
-    send_email.delay(instance.artist.stage_name, instance.name)
+    send_email.delay(instance.artist.stage_name, instance.artist.user.email, instance.name)

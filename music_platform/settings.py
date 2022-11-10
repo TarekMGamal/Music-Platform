@@ -169,3 +169,10 @@ REST_FRAMEWORK = {
 
 CELERY_CONF_BROKER_URL = env('CELERY_CONF_BROKER_URL')
 CELERY_CONF_RESULT_BACKEND = env('CELERY_CONF_RESULT_BACKEND')
+
+CELERY_CONF_BEAT_SCHEDULE = {
+    'daily-task-every-24-hours': {
+        'task': 'albums.tasks.daily_task',
+        'schedule': '*/24',
+    },
+}
