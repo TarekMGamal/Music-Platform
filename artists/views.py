@@ -4,7 +4,8 @@ from .models import Artist
 from .forms import CreateArtistForm
 from django.views.generic import CreateView, TemplateView
 from django.contrib.auth.mixins import LoginRequiredMixin
-
+from rest_framework import generics
+from .serializers import artist_serializer
 
 class artists(TemplateView):
     template_name = 'artists/artists.html'
@@ -20,3 +21,10 @@ class artists_create(LoginRequiredMixin, CreateView):
     form_class = CreateArtistForm
     template_name = 'artists/artists_create.html'
     success_url = '/artists/'
+    
+
+# REST framework views
+
+class artists_api(generics.ListCreateAPIView):
+    queryset = Artist.objects.all()
+    serializer_class = artist_serializer
