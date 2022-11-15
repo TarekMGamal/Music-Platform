@@ -29,13 +29,22 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 
+# For using User custom model instead of the default one
+
+AUTH_USER_MODEL = "users.User"
+
+
 # Application definition
 
 INSTALLED_APPS = [
+    'knox',
+    'django_extensions',
     'rest_framework',
     'imagekit',
-    'artists.apps.ArtistsConfig',
-    'albums.apps.AlbumsConfig',
+    'artists',
+    'albums',
+    'users',
+    'authentication',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -132,3 +141,12 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
+
+
+# For knox token authentication
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'knox.auth.TokenAuthentication',
+    ]
+}
