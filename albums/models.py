@@ -33,12 +33,12 @@ class Song(models.Model):
 def song_pre_save(sender, instance, **kwargs):
     if instance.name == '':
         instance.name = instance.album.name
-        
+'''        
 @receiver(pre_save, sender=Album)
 def album_pre_save(sender, instance, **kwargs):
     if Song.objects.all().count() == 0:
         raise ValidationErr
-
+'''
 @receiver(pre_delete, sender=Song)
 def check_song_limits(sender, instance, **kwargs):
     album = instance.album
